@@ -5,9 +5,9 @@ import Otros.Herramientas;
 import Tablero.Casilla;
 import Tablero.Movimiento;
 import Tablero.Tablero;
+import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class Alfil extends Pieza{
@@ -15,7 +15,7 @@ public class Alfil extends Pieza{
     private final static int[] CoordenadasMovimientosPosibles = {-9,-7,7,9};
 
     public Alfil(Color colorPieza, int posiciónPieza) {
-        super(posiciónPieza, colorPieza);
+        super(TipoDePieza.ALFIL,posiciónPieza, colorPieza);
     }
 
     @Override
@@ -46,7 +46,12 @@ public class Alfil extends Pieza{
                 }
             }
         }
-        return  Collections.unmodifiableList(movimientosLegales);    
+        return  ImmutableList.copyOf(movimientosLegales);    
+    }
+    
+    @Override
+    public Alfil moverPieza(final Movimiento movimiento) {
+        return new Alfil(movimiento.getPiezaEnMovimiento().getColorPieza(), movimiento.getCoordenadaDeDestino());
     }
     
     @Override

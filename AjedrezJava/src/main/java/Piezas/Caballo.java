@@ -5,8 +5,8 @@ import Otros.Herramientas;
 import Tablero.Casilla;
 import Tablero.Movimiento;
 import Tablero.Tablero;
+import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Caballo extends Pieza {
@@ -14,7 +14,7 @@ public class Caballo extends Pieza {
     private final static int[] CoordenadasMovimientosPosibles = {-17,-15,-10,-6,6,10,15,17};
             
     public Caballo(Color colorPieza, int posiciónPieza){
-        super(posiciónPieza, colorPieza);
+        super(TipoDePieza.CABALLO,posiciónPieza, colorPieza);
     }
 
     @Override
@@ -43,8 +43,14 @@ public class Caballo extends Pieza {
                 }
             }
         }
-        return  Collections.unmodifiableList(movimientosLegales);
+        return  ImmutableList.copyOf(movimientosLegales);
     }
+    
+    @Override
+    public Caballo moverPieza(final Movimiento movimiento) {
+        return new Caballo(movimiento.getPiezaEnMovimiento().getColorPieza(), movimiento.getCoordenadaDeDestino());
+    }
+    
     
     @Override
     public String toString(){

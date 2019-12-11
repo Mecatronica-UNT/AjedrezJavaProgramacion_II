@@ -5,17 +5,17 @@ import Otros.Herramientas;
 import Tablero.Casilla;
 import Tablero.Movimiento;
 import Tablero.Tablero;
+import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class Rey extends Pieza{
     
      private final static int[] CoordenadasMovimientosPosibles = {-9,-8,-7,-1,1,7,8,9};
 
-    public Rey(Color colorPieza, int posiciónPieza) {
-        super(posiciónPieza, colorPieza);
+    public Rey(final Color colorPieza,final int posiciónPieza) {
+        super(TipoDePieza.REY, posiciónPieza, colorPieza);
     }
 
     @Override
@@ -42,8 +42,14 @@ public class Rey extends Pieza{
                 }
             }
         }
-        return Collections.unmodifiableList(movimientosLegales);
+        return ImmutableList.copyOf(movimientosLegales);
     }
+    
+    @Override
+    public Rey moverPieza(final Movimiento movimiento) {
+        return new Rey(movimiento.getPiezaEnMovimiento().getColorPieza(), movimiento.getCoordenadaDeDestino());
+    }
+    
     private static boolean esExcepciónDePrimeraColumna(final int posiciónActual, final int coordenadaSeleccionada){
         return Herramientas.primeraColumna[posiciónActual] && (coordenadaSeleccionada == -9||coordenadaSeleccionada == -1 || coordenadaSeleccionada == 7);  
     }

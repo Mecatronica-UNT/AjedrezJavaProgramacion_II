@@ -6,9 +6,9 @@ import Tablero.Movimiento;
 import Tablero.Movimiento.MovimientoAtaque;
 import Tablero.Movimiento.MovimientoPacífico;
 import Tablero.Tablero;
+import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class Peón extends Pieza{
@@ -16,7 +16,7 @@ public class Peón extends Pieza{
     private final static int[] CoordenadasMovimientosPosibles = {8,16,7,9};
 
     public Peón(final Color colorPieza, final int posiciónPieza) {
-        super( posiciónPieza, colorPieza);
+        super(TipoDePieza.PEÓN, posiciónPieza, colorPieza);
     }
 
     @Override
@@ -59,8 +59,14 @@ public class Peón extends Pieza{
                 }
             }
         }
-        return Collections.unmodifiableList(movimientosLegales);
+        return ImmutableList.copyOf(movimientosLegales);
     }
+    
+    @Override
+    public Peón moverPieza(final Movimiento movimiento) {
+        return new Peón(movimiento.getPiezaEnMovimiento().getColorPieza(), movimiento.getCoordenadaDeDestino());
+    }
+    
     @Override
     public String toString(){
         return tipoDePieza.PEÓN.toString();

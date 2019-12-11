@@ -5,15 +5,15 @@ import Otros.Herramientas;
 import Tablero.Casilla;
 import Tablero.Movimiento;
 import Tablero.Tablero;
+import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class Torre extends Pieza{
 
     public Torre(Color colorPieza, int posiciónPieza) {
-        super(posiciónPieza, colorPieza);
+        super(TipoDePieza.TORRE, posiciónPieza, colorPieza);
     }
     
     private final static int[] CoordenadasMovimientosPosibles = {-8,-1,1,8};
@@ -46,8 +46,14 @@ public class Torre extends Pieza{
                 }
             }
         }
-        return  Collections.unmodifiableList(movimientosLegales);    
+        return  ImmutableList.copyOf(movimientosLegales);    
     }
+    
+    @Override
+    public Torre moverPieza(final Movimiento movimiento) {
+        return new Torre(movimiento.getPiezaEnMovimiento().getColorPieza(), movimiento.getCoordenadaDeDestino());
+    }
+    
     private static boolean esExcepciónDePrimeraColumna(final int posiciónActual, final int coordenadaSeleccionada){
         return Herramientas.primeraColumna[posiciónActual] && (coordenadaSeleccionada == -1);  
     }

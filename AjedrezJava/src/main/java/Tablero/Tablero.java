@@ -12,6 +12,7 @@ import Piezas.Dama;
 import Piezas.Rey;
 import Piezas.Torre;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,14 +26,21 @@ public class Tablero {
     public final List<Casilla> tableroJuego;
     private final Collection<Pieza> piezasBlancas;
     private final Collection<Pieza> piezasNegras;
+    private final JugadorBlanco jugadorBlanco;
+    private final JugadorNegro jugadorNegro;
+    public final Jugador jugadorActual;
     
-    public Tablero(Constructor builder){
+    public Tablero(final Constructor builder){
         this.tableroJuego = crearJuegoTablero(builder);
         this.piezasBlancas = calcularPiezasActivas(this.tableroJuego, Color.BLANCO);
         this.piezasNegras = calcularPiezasActivas(this.tableroJuego, Color.NEGRO);
         
         final Collection<Movimiento> movimientosLegalesStandardBlanco = calcularMovimientosLegales(this.piezasBlancas);
         final Collection<Movimiento> movimientosLegalesStandardNegro = calcularMovimientosLegales(this.piezasNegras);
+        
+        this.jugadorBlanco = new JugadorBlanco(this, movimientosLegalesStandardBlanco, movimientosLegalesStandardNegro);
+        this.jugadorNegro = new JugadorNegro(this, movimientosLegalesStandardBlanco, movimientosLegalesStandardNegro);
+        this.jugadorActual = Constructor.siguienteJugador.elegirJugador(this.jugadorBlanco, this.jugadorNegro);
     }
 
     @Override
@@ -46,6 +54,18 @@ public class Tablero {
             }
         }
         return builder.toString();
+    }
+    
+    public Jugador jugadorBlanco(){
+        return this.jugadorBlanco;
+    }
+    
+    public Jugador jugadorNegro(){
+        return this.jugadorNegro;
+    }
+    
+    public Jugador jugadorActual(){
+        return this.jugadorActual;
     }
     
     private Collection<Movimiento> calcularMovimientosLegales(Collection<Pieza> piezas){
@@ -65,8 +85,7 @@ public class Tablero {
     public Collection<Pieza> getPiezasBlancas(){
         return this.piezasBlancas;
     }
-    
-    
+
     private static Collection<Pieza> calcularPiezasActivas(final List<Casilla> tableroJuego, final Color color){
         final List<Pieza> piezasActivas = new ArrayList<>();
         
@@ -133,17 +152,20 @@ public class Tablero {
         constructor.setJugadorDeTurno(Color.BLANCO);
         return constructor.Construir();
     }
+
+    public Iterable<Movimiento> getTodosLosMovimientosLegales() {
+        return Iterables.unmodifiableIterable(Iterables.concat(this.jugadorBlanco.getMovimientosLegales(), this.jugadorNegro.getMovimientosLegales()));
+    }
     
     public static class Constructor{
         
         Map<Integer,Pieza> ConfiguracionTablero;
-        Color siguienteJugador;
+        static Color  siguienteJugador;
         
         public Constructor(){
             this.ConfiguracionTablero = new HashMap<>();
         }
-        
-        
+
         public Constructor setPieza(final Pieza pieza){
             this.ConfiguracionTablero.put(pieza.getPosiciónPieza(), pieza);
             return this;
@@ -157,6 +179,10 @@ public class Tablero {
         public Tablero Construir(){
             return new Tablero(this);
         
+        }
+
+        public void setCapturaAlPaso(Peón peónMovido) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
 }
