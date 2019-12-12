@@ -3,7 +3,7 @@ package Jugador;
 import Tablero.Movimiento;
 import Tablero.Tablero;
 
-class TransiciónDeMovimiento {
+public class TransiciónDeMovimiento {
     
     private final Tablero tableroDeTransición;
     private final Movimiento movimiento;
@@ -18,5 +18,9 @@ class TransiciónDeMovimiento {
     
     public EstatusDeMovimiento getEstatusDeMovimiento(){
         return this.estatusDeMovimiento;
+    }
+    
+    public Tablero getTableroDeTransición() {
+        return this.tableroDeTransición;
     }
 }

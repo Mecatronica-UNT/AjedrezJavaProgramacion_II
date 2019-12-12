@@ -15,7 +15,7 @@ public class Rey extends Pieza{
      private final static int[] CoordenadasMovimientosPosibles = {-9,-8,-7,-1,1,7,8,9};
 
     public Rey(final Color colorPieza,final int posiciónPieza) {
-        super(TipoDePieza.REY, posiciónPieza, colorPieza);
+        super(Pieza.TipoDePieza.REY, posiciónPieza, colorPieza);
     }
 
     @Override

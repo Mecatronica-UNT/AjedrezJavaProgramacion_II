@@ -15,7 +15,7 @@ public class Alfil extends Pieza{
     private final static int[] CoordenadasMovimientosPosibles = {-9,-7,7,9};
 
     public Alfil(Color colorPieza, int posiciónPieza) {
-        super(TipoDePieza.ALFIL,posiciónPieza, colorPieza);
+        super(Pieza.TipoDePieza.ALFIL,posiciónPieza, colorPieza);
     }
 
     @Override

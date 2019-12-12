@@ -1,5 +1,5 @@
 package Jugador;
-
+//revisar línea 56 a 59 (falta arreglar algo)
 import Otros.Color;
 import Piezas.Pieza;
 import Piezas.Torre;
@@ -20,7 +20,7 @@ public class JugadorBlanco extends Jugador{
     
     @Override
     public Collection<Pieza> getPiezasActivas(){
-        return this.tablero.getPiezasNegras();
+        return this.tablero.getPiezasBlancas();
     }
     
     @Override
@@ -53,8 +53,10 @@ public class JugadorBlanco extends Jugador{
                !this.tablero.getCasilla(58).estáOcupadoPorPieza() && 
                !this.tablero.getCasilla(57).estáOcupadoPorPieza()){
                 final Casilla casillaEnroque = this.tablero.getCasilla(56);
-                if(casillaEnroque.estáOcupadoPorPieza() && casillaEnroque.getPieza().esPrimerMovimiento()){
-                    enroquesRey.add(new Movimiento.EnroqueDama(this.tablero, this.jugadorRey, 58, (Torre)casillaEnroque.getPieza(), casillaEnroque.getCoordenadaDeCasilla(), 59));
+                if(casillaEnroque.estáOcupadoPorPieza() && casillaEnroque.getPieza().esPrimerMovimiento()&& Jugador.calcularAtaqueEnCasilla(58, movimientosLegales).isEmpty() &&
+                        Jugador.calcularAtaqueEnCasilla(59, movimientosLegales).isEmpty() && 
+                        casillaEnroque.getPieza().getTipoDePieza().esTorre()){
+                      enroquesRey.add(new Movimiento.EnroqueDama(this.tablero, this.jugadorRey, 58, (Torre)casillaEnroque.getPieza(), casillaEnroque.getCoordenadaDeCasilla(), 59));
                 }
             }
         }

@@ -7,8 +7,14 @@ public class Herramientas {
     public static boolean[] séptimaColumna = iniciarColumna(6);
     public static boolean[] octavaColumna = iniciarColumna(7);
     
+    public static boolean[] primeraFila = iniciarFila(0);
     public static boolean[] segundaFila = iniciarFila(8);
-    public static boolean[] séptimaFila = iniciarFila(48);
+    public static boolean[] terceraFila  = iniciarFila(16);
+    public static boolean[] cuartaFila  = iniciarFila(24);
+    public static boolean[] quintaFila = iniciarFila(32);
+    public static boolean[] sextaFila  = iniciarFila(40);
+    public static boolean[] séptimaFila= iniciarFila(48);
+    public static boolean[] octavaFila = iniciarFila(56);
     
     public static final int numeroCasillas = 64;
     public static final int numeroCasillasPorColumna = 8;

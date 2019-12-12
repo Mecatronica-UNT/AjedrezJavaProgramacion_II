@@ -13,7 +13,7 @@ import java.util.List;
 public class Torre extends Pieza{
 
     public Torre(Color colorPieza, int posiciónPieza) {
-        super(TipoDePieza.TORRE, posiciónPieza, colorPieza);
+        super(Pieza.TipoDePieza.TORRE, posiciónPieza, colorPieza);
     }
     
     private final static int[] CoordenadasMovimientosPosibles = {-8,-1,1,8};

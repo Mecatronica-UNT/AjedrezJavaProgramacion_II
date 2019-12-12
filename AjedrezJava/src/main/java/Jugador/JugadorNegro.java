@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+//revisar línea 63 a 66 (falta arreglar algo)
 package Jugador;
  
 import Otros.Color;
@@ -63,7 +60,9 @@ public class JugadorNegro extends Jugador{
                !this.tablero.getCasilla(2).estáOcupadoPorPieza() && 
                !this.tablero.getCasilla(3).estáOcupadoPorPieza()){
                 final Casilla casillaEnroque = this.tablero.getCasilla(0);
-                if(casillaEnroque.estáOcupadoPorPieza() && casillaEnroque.getPieza().esPrimerMovimiento()){
+                if(casillaEnroque.estáOcupadoPorPieza() && casillaEnroque.getPieza().esPrimerMovimiento() && Jugador.calcularAtaqueEnCasilla(2, movimientosLegales).isEmpty() &&
+                        Jugador.calcularAtaqueEnCasilla(3, movimientosLegales).isEmpty() &&
+                        casillaEnroque.getPieza().getTipoDePieza().esTorre()){
                     enroquesRey.add(new Movimiento.EnroqueDama(this.tablero, this.jugadorRey, 2, (Torre)casillaEnroque.getPieza(), casillaEnroque.getCoordenadaDeCasilla(), 1));
                 }
             }

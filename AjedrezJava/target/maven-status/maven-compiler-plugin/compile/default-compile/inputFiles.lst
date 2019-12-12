@@ -2,6 +2,8 @@ C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Jugador\Estat
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Tablero\Tablero.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Otros\Herramientas.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Piezas\Rey.java
+C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\GUI\Ventana1.java
+C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Piezas\Dama.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Jugador\JugadorNegro.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Jugador\TransiciónDeMovimiento.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Piezas\Alfil.java
@@ -14,5 +16,5 @@ C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Piezas\Caball
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Otros\Color.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Piezas\Pieza.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Piezas\Peón.java
-C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Piezas\Reina.java
+C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\GUI\JAjedrez.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Tablero\Movimiento.java

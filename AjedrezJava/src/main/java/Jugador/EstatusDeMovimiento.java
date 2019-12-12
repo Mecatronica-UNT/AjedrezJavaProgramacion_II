@@ -1,28 +1,36 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Jugador;
 
+/**
+ *
+ * @author JOSE MONTALVO
+ */
 public enum EstatusDeMovimiento {
     HECHO {
         @Override
-        boolean estáHecho() {
+        public boolean estáHecho() {
             return true;
         }
     },
     
     MOVIMIENTO_ILEGAL {
         @Override
-        boolean estáHecho() {
+        public boolean estáHecho() {
             return false;
         }
-        
-
+         
     },
-    
-    DEJAR_AL_JUGADOR_EN_JAQUE{
+  DEJAR_AL_JUGADOR_EN_JAQUE{
         @Override
-        boolean estáHecho() {
+        public boolean estáHecho() {
             return false;
         }
     };
-    abstract boolean estáHecho();
+    public abstract boolean estáHecho();
+   
    
 }

@@ -13,7 +13,7 @@ import java.util.List;
 public class Dama extends Pieza{
 
     public Dama(Color colorPieza, int posiciónPieza) {
-        super(TipoDePieza.DAMA,posiciónPieza, colorPieza);
+        super(Pieza.TipoDePieza.DAMA,posiciónPieza, colorPieza);
     }
     private final static int[] CoordenadasMovimientosPosibles = {-9,-8,-7,-1,1,7,8,9};
     @Override

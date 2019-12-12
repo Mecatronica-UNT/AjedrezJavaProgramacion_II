@@ -16,7 +16,7 @@ public class Peón extends Pieza{
     private final static int[] CoordenadasMovimientosPosibles = {8,16,7,9};
 
     public Peón(final Color colorPieza, final int posiciónPieza) {
-        super(TipoDePieza.PEÓN, posiciónPieza, colorPieza);
+        super(Pieza.TipoDePieza.PEÓN, posiciónPieza, colorPieza);
     }
 
     @Override

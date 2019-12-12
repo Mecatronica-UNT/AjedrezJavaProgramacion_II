@@ -14,7 +14,7 @@ public class Caballo extends Pieza {
     private final static int[] CoordenadasMovimientosPosibles = {-17,-15,-10,-6,6,10,15,17};
             
     public Caballo(Color colorPieza, int posiciónPieza){
-        super(TipoDePieza.CABALLO,posiciónPieza, colorPieza);
+        super(Pieza.TipoDePieza.CABALLO,posiciónPieza, colorPieza);
     }
 
     @Override
