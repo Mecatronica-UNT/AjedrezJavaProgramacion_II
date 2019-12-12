@@ -4,6 +4,8 @@ import Otros.Color;
 import Otros.Herramientas;
 import Tablero.Casilla;
 import Tablero.Movimiento;
+import Tablero.Movimiento.MovimientoOrdinario;
+import Tablero.Movimiento.MovimientoOrdinarioAtaque;
 import Tablero.Tablero;
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
@@ -13,10 +15,14 @@ public class Caballo extends Pieza {
     
     private final static int[] CoordenadasMovimientosPosibles = {-17,-15,-10,-6,6,10,15,17};
             
-    public Caballo(Color colorPieza, int posiciónPieza){
-        super(Pieza.TipoDePieza.CABALLO,posiciónPieza, colorPieza);
+    public Caballo(final Color colorPieza,final int posiciónPieza){
+        super(Pieza.TipoDePieza.CABALLO,posiciónPieza, colorPieza, true);
     }
-
+    
+    public Caballo(final Color colorPieza,final int posiciónPieza, final boolean esPrimerMovimiento){
+        super(Pieza.TipoDePieza.CABALLO,posiciónPieza, colorPieza, esPrimerMovimiento);
+    }
+    
     @Override
     public List<Movimiento> calcularMovimientosLegales(Tablero tablero) {
         
@@ -33,12 +39,12 @@ public class Caballo extends Pieza {
                 }
                 final Casilla casillaDeDestino = tablero.getCasilla(coordenadaDeDestino);
                 if(!casillaDeDestino.estáOcupadoPorPieza()){
-                    movimientosLegales.add(new Movimiento.MovimientoPacífico(tablero,this,coordenadaDeDestino));
+                    movimientosLegales.add(new MovimientoOrdinario(tablero,this,coordenadaDeDestino));
                 }else{
                     final Pieza piezaEnLaCoordenadaDeDestino = casillaDeDestino.getPieza();
                     final Color colorPieza = piezaEnLaCoordenadaDeDestino.getColorPieza();
                     if(this.colorPieza != colorPieza){
-                        movimientosLegales.add(new Movimiento.MovimientoAtaque(tablero,this,piezaEnLaCoordenadaDeDestino,coordenadaDeDestino));
+                        movimientosLegales.add(new MovimientoOrdinarioAtaque(tablero,this,piezaEnLaCoordenadaDeDestino,coordenadaDeDestino));
                     }
                 }
             }
@@ -54,7 +60,7 @@ public class Caballo extends Pieza {
     
     @Override
     public String toString(){
-        return tipoDePieza.CABALLO.toString();
+        return TipoDePieza.CABALLO.toString();
     }
     private static boolean esExcepciónDePrimeraColumna(final int posiciónActual, final int coordenadaSeleccionada){
         return Herramientas.primeraColumna[posiciónActual] && (coordenadaSeleccionada == -17||coordenadaSeleccionada == -10||

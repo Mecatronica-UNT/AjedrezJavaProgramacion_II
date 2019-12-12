@@ -36,11 +36,9 @@ public abstract class Jugador {
     
     protected static Collection<Movimiento> calcularAtaqueEnCasilla(int posiciónDePieza, Collection<Movimiento> movimientos) {
         final List<Movimiento> movimientosDeAtaque = new ArrayList();
-        for(final Movimiento movimiento : movimientos){
-            if(posiciónDePieza == movimiento.getCoordenadaDeDestino()){
-                movimientosDeAtaque.add(movimiento);
-            }
-        }
+        movimientos.stream().filter((movimiento) -> (posiciónDePieza == movimiento.getCoordenadaDeDestino())).forEachOrdered((movimiento) -> {
+            movimientosDeAtaque.add(movimiento);
+        });
         return ImmutableList.copyOf(movimientosDeAtaque);
     }
     
@@ -62,11 +60,8 @@ public abstract class Jugador {
     }
     
     protected boolean tieneMovimientosDeEscape() {
-        for(final Movimiento movimiento : this.movimientosLegales){
-            final TransiciónDeMovimiento transición = hacerUnMovimiento(movimiento);
-            if(transición.getEstatusDeMovimiento().estáHecho()){
-                return true;
-            }
+        if (this.movimientosLegales.stream().map((movimiento) -> hacerUnMovimiento(movimiento)).anyMatch((transición) -> (transición.getEstatusDeMovimiento().estáHecho()))) {
+            return true;
         }
         return false;
     }
@@ -91,7 +86,7 @@ public abstract class Jugador {
         
         final Tablero tableroDeTransición = movimiento.Ejecutar();
         
-        final Collection<Movimiento> ataquesRey = Jugador.calcularAtaqueEnCasilla(tableroDeTransición.jugadorActual.getOponente().getJugadorRey().getPosiciónPieza(),
+        final Collection<Movimiento> ataquesRey = Jugador.calcularAtaqueEnCasilla(tableroDeTransición.jugadorActual().getOponente().getJugadorRey().getPosiciónPieza(),
                 tableroDeTransición.jugadorActual().getMovimientosLegales());
         
         if(!ataquesRey.isEmpty()){

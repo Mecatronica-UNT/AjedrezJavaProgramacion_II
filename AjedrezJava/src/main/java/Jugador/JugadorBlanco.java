@@ -1,5 +1,4 @@
 package Jugador;
-//revisar línea 56 a 59 (falta arreglar algo)
 import Otros.Color;
 import Piezas.Pieza;
 import Piezas.Torre;
@@ -12,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class JugadorBlanco extends Jugador{
+
     public JugadorBlanco(final Tablero tablero, 
                           final Collection<Movimiento> movimientosLegalesStandardBlanco, 
                           final Collection<Movimiento> movimientosLegalesStandardNegro){   

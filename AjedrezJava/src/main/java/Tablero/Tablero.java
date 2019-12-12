@@ -28,10 +28,11 @@ public class Tablero {
     private final Collection<Pieza> piezasNegras;
     private final JugadorBlanco jugadorBlanco;
     private final JugadorNegro jugadorNegro;
-    public final Jugador jugadorActual;
+    private final Jugador jugadorActual;
+    private final Peón enPassantPeón;
     
-    public Tablero(final Constructor builder){
-        this.tableroJuego = crearJuegoTablero(builder);
+    public Tablero(final Constructor constructor){
+        this.tableroJuego = crearJuegoTablero(constructor);
         this.piezasBlancas = calcularPiezasActivas(this.tableroJuego, Color.BLANCO);
         this.piezasNegras = calcularPiezasActivas(this.tableroJuego, Color.NEGRO);
         
@@ -41,15 +42,16 @@ public class Tablero {
         this.jugadorBlanco = new JugadorBlanco(this, movimientosLegalesStandardBlanco, movimientosLegalesStandardNegro);
         this.jugadorNegro = new JugadorNegro(this, movimientosLegalesStandardBlanco, movimientosLegalesStandardNegro);
         this.jugadorActual = Constructor.siguienteJugador.elegirJugador(this.jugadorBlanco, this.jugadorNegro);
+        this.enPassantPeón = constructor.enPassantPeón;
     }
 
     @Override
     public String toString(){
         final StringBuilder builder = new StringBuilder();
-        for(int i=0; i<Herramientas.numeroCasillas; i++){
+        for(int i=0; i<Herramientas.NUM_CASILLAS; i++){
             final String textoCasilla  = this.tableroJuego.get(i).toString();
             builder.append(String.format("%3s", textoCasilla));
-            if((i+1)% Herramientas.numeroCasillasPorColumna == 0){
+            if((i+1)% Herramientas.NUM_CASILLAS_COLUMNA == 0){
                 builder.append("\n");
             }
         }
@@ -66,6 +68,10 @@ public class Tablero {
     
     public Jugador jugadorActual(){
         return this.jugadorActual;
+    }
+    
+    public Peón getEnPassantPeón(){
+        return this.enPassantPeón;
     }
     
     private Collection<Movimiento> calcularMovimientosLegales(Collection<Pieza> piezas){
@@ -89,14 +95,9 @@ public class Tablero {
     private static Collection<Pieza> calcularPiezasActivas(final List<Casilla> tableroJuego, final Color color){
         final List<Pieza> piezasActivas = new ArrayList<>();
         
-        for (final Casilla casilla: tableroJuego){
-            if(casilla.estáOcupadoPorPieza()){
-                final Pieza pieza = casilla.getPieza();
-                if(pieza.getColorPieza() == color){
-                    piezasActivas.add(pieza);
-                }
-            }
-        }
+        tableroJuego.stream().filter((casilla) -> (casilla.estáOcupadoPorPieza())).map((casilla) -> casilla.getPieza()).filter((pieza) -> (pieza.getColorPieza() == color)).forEachOrdered((pieza) -> {
+            piezasActivas.add(pieza);
+        });
         return ImmutableList.copyOf(piezasActivas);
     }
 
@@ -105,8 +106,8 @@ public class Tablero {
     }
     
     private static List<Casilla> crearJuegoTablero(final Constructor builder){
-        final Casilla[] casillas = new Casilla[Herramientas.numeroCasillas];
-        for(int i=0; i<Herramientas.numeroCasillas; i++){
+        final Casilla[] casillas = new Casilla[Herramientas.NUM_CASILLAS];
+        for(int i=0; i<Herramientas.NUM_CASILLAS; i++){
             casillas[i] = Casilla.crearEspacio(i, builder.ConfiguracionTablero.get(i));
         }
         return ImmutableList.copyOf(Arrays.asList(casillas));
@@ -161,6 +162,8 @@ public class Tablero {
         
         Map<Integer,Pieza> ConfiguracionTablero;
         static Color  siguienteJugador;
+        Peón enPassantPeón;
+        Movimiento movimientoTransición;
         
         public Constructor(){
             this.ConfiguracionTablero = new HashMap<>();
@@ -172,17 +175,22 @@ public class Tablero {
         }
         
         public Constructor setJugadorDeTurno(final Color siguienteJugador){
-            this.siguienteJugador = siguienteJugador;
+            Constructor.siguienteJugador = siguienteJugador;
             return this;
         }
         
         public Tablero Construir(){
             return new Tablero(this);
-        
         }
 
-        public void setCapturaAlPaso(Peón peónMovido) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public Constructor setCapturaAlPaso(final Peón enPassantPeón) {
+            this.enPassantPeón = enPassantPeón;
+            return this;
+        }
+        
+        public Constructor setTransiciónDeMovimiento(final Movimiento movimientoTransición) {
+            this.movimientoTransición = movimientoTransición;
+            return this;
         }
     }
 }

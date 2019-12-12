@@ -13,7 +13,7 @@ public abstract class Casilla {
         
         final Map<Integer, CasillaVacía> mapaDeCasillasVacías = new HashMap<>();
         
-        for(int i = 0; i<Herramientas.numeroCasillas; i++){
+        for(int i = 0; i<Herramientas.NUM_CASILLAS; i++){
             mapaDeCasillasVacías.put(i, new CasillaVacía(i));
         }
         return Collections.unmodifiableMap(mapaDeCasillasVacías);

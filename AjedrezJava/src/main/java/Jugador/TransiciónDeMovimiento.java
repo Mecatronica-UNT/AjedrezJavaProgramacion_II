@@ -9,7 +9,6 @@ public class TransiciónDeMovimiento {
     private final Movimiento movimiento;
     private final EstatusDeMovimiento estatusDeMovimiento;
     
-    
     public TransiciónDeMovimiento(final Tablero tableroDeTransición, final Movimiento movimiento, final EstatusDeMovimiento estatusDeMovimiento){
         this.tableroDeTransición = tableroDeTransición;
         this.movimiento = movimiento;

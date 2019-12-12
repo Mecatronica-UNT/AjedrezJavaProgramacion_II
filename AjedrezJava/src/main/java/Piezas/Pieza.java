@@ -9,14 +9,15 @@ public abstract class Pieza {
     protected final TipoDePieza tipoDePieza;
     protected final int posiciónPieza;
     protected final Color colorPieza;
-    protected final boolean esPrimerMovimiento = false;
+    protected final boolean esPrimerMovimiento;
     private final int cachedHashCode;
      
-    Pieza(final TipoDePieza tipoDePieza, final int posiciónPieza, final Color colorPieza){
+    Pieza(final TipoDePieza tipoDePieza, final int posiciónPieza, final Color colorPieza, final Boolean esPrimerMovimiento){
         this.tipoDePieza = tipoDePieza;
         this.posiciónPieza = posiciónPieza;
         this.colorPieza = colorPieza;
         this.cachedHashCode = computeHashCode();
+        this.esPrimerMovimiento = esPrimerMovimiento;
     }
     
     public int computeHashCode(){
@@ -61,12 +62,15 @@ public abstract class Pieza {
         return this.esPrimerMovimiento;
     }
     
+    public int getValorPieza(){
+        return this.tipoDePieza.getValorPieza();
+    }
     public abstract Collection<Movimiento> calcularMovimientosLegales(final Tablero tablero);
 
     public abstract Pieza moverPieza(Movimiento movimiento);
      
     public enum TipoDePieza{
-        ALFIL("A"){
+        ALFIL(300, "A"){
             @Override
             public boolean esRey(){
                 return false;
@@ -77,7 +81,7 @@ public abstract class Pieza {
                 return false;
             }
         },
-        CABALLO("C"){
+        CABALLO(300, "C"){
              @Override
              public boolean esRey(){
                 return false;
@@ -88,7 +92,7 @@ public abstract class Pieza {
                 return false;
             }
         },
-        PEÓN("P"){
+        PEÓN(100, "P"){
              @Override
              public boolean esRey(){
                 return false;
@@ -99,7 +103,7 @@ public abstract class Pieza {
                 return false;
             }
         },
-        DAMA("D"){
+        DAMA(900, "D"){
              @Override
              public boolean esRey(){
                 return false;
@@ -110,7 +114,7 @@ public abstract class Pieza {
                 return false;
             }
         },
-        REY("R"){
+        REY(10000,"R"){
              @Override
              public boolean esRey(){
                 return true;
@@ -121,7 +125,7 @@ public abstract class Pieza {
                 return false;
             }
         },
-        TORRE("T"){
+        TORRE(500, "T"){
              @Override
              public boolean esRey(){
                 return false;
@@ -134,8 +138,9 @@ public abstract class Pieza {
         };
        
         private final String nombreDePieza;
+        private int valorPieza;
         
-        TipoDePieza(final String nombreDePieza){
+        TipoDePieza(final int valorPieza,final String nombreDePieza ){
 
             this.nombreDePieza = nombreDePieza;
         }
@@ -147,6 +152,9 @@ public abstract class Pieza {
         
         public abstract boolean esRey();
         public abstract boolean esTorre();
+        public int getValorPieza(){
+            return this.valorPieza;
+        }
 
     }
 }

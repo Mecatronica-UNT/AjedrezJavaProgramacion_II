@@ -4,6 +4,8 @@ import Otros.Color;
 import Otros.Herramientas;
 import Tablero.Casilla;
 import Tablero.Movimiento;
+import Tablero.Movimiento.MovimientoOrdinario;
+import Tablero.Movimiento.MovimientoOrdinarioAtaque;
 import Tablero.Tablero;
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
@@ -15,7 +17,10 @@ public class Rey extends Pieza{
      private final static int[] CoordenadasMovimientosPosibles = {-9,-8,-7,-1,1,7,8,9};
 
     public Rey(final Color colorPieza,final int posiciónPieza) {
-        super(Pieza.TipoDePieza.REY, posiciónPieza, colorPieza);
+        super(Pieza.TipoDePieza.REY, posiciónPieza, colorPieza,true);
+    }
+    public Rey(final Color colorPieza, final int posiciónPieza, final Boolean esPrimerMovimiento){
+        super(Pieza.TipoDePieza.TORRE, posiciónPieza, colorPieza, esPrimerMovimiento);
     }
 
     @Override
@@ -32,12 +37,12 @@ public class Rey extends Pieza{
             if(Herramientas.esCoordenadaVálida(coordenadaDeDestino)){
                 final Casilla casillaDeDestino = tablero.getCasilla(coordenadaDeDestino);
                 if(!casillaDeDestino.estáOcupadoPorPieza()){
-                    movimientosLegales.add(new Movimiento.MovimientoPacífico(tablero,this,coordenadaDeDestino));
+                    movimientosLegales.add(new MovimientoOrdinario(tablero,this,coordenadaDeDestino));
                 }else{
                     final Pieza piezaEnLaCoordenadaDeDestino = casillaDeDestino.getPieza();
                     final Color colorPieza = piezaEnLaCoordenadaDeDestino.getColorPieza();
                     if(this.colorPieza != colorPieza){
-                        movimientosLegales.add(new Movimiento.MovimientoAtaque(tablero,this,piezaEnLaCoordenadaDeDestino,coordenadaDeDestino));
+                        movimientosLegales.add(new MovimientoOrdinarioAtaque(tablero,this,piezaEnLaCoordenadaDeDestino,coordenadaDeDestino));
                     }
                 }
             }
@@ -59,6 +64,6 @@ public class Rey extends Pieza{
     
     @Override
     public String toString(){
-        return tipoDePieza.REY.toString();
+        return TipoDePieza.REY.toString();
     }
 }

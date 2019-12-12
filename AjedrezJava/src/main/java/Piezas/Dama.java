@@ -4,6 +4,8 @@ import Otros.Color;
 import Otros.Herramientas;
 import Tablero.Casilla;
 import Tablero.Movimiento;
+import Tablero.Movimiento.MovimientoOrdinario;
+import Tablero.Movimiento.MovimientoOrdinarioAtaque;
 import Tablero.Tablero;
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
@@ -12,9 +14,14 @@ import java.util.List;
 
 public class Dama extends Pieza{
 
-    public Dama(Color colorPieza, int posiciónPieza) {
-        super(Pieza.TipoDePieza.DAMA,posiciónPieza, colorPieza);
+    public Dama(final Color colorPieza,final int posiciónPieza) {
+        super(Pieza.TipoDePieza.DAMA,posiciónPieza, colorPieza,true);
     }
+    
+    public Dama(final Color colorPieza, final int posiciónPieza, final boolean esPrimerMovimiento){
+        super(Pieza.TipoDePieza.TORRE, posiciónPieza, colorPieza, esPrimerMovimiento);
+    }
+    
     private final static int[] CoordenadasMovimientosPosibles = {-9,-8,-7,-1,1,7,8,9};
     @Override
     public Collection<Movimiento> calcularMovimientosLegales(Tablero tablero) {
@@ -32,12 +39,12 @@ public class Dama extends Pieza{
                 if(Herramientas.esCoordenadaVálida(coordenadaDeDestino)){
                     final Casilla casillaDeDestino = tablero.getCasilla(coordenadaDeDestino);
                     if(!casillaDeDestino.estáOcupadoPorPieza()){
-                        movimientosLegales.add(new Movimiento.MovimientoPacífico(tablero,this,coordenadaDeDestino));
+                        movimientosLegales.add(new MovimientoOrdinario(tablero,this,coordenadaDeDestino));
                     }else{
                         final Pieza piezaEnLaCoordenadaDeDestino = casillaDeDestino.getPieza();
                         final Color bandoPieza = piezaEnLaCoordenadaDeDestino.getColorPieza();
                         if(this.colorPieza != bandoPieza){
-                            movimientosLegales.add(new Movimiento.MovimientoAtaque(tablero,this,piezaEnLaCoordenadaDeDestino,coordenadaDeDestino));
+                            movimientosLegales.add(new MovimientoOrdinarioAtaque(tablero,this,piezaEnLaCoordenadaDeDestino,coordenadaDeDestino));
                         }
                         break;
                     } 
@@ -61,7 +68,7 @@ public class Dama extends Pieza{
     
     @Override
     public String toString(){
-        return tipoDePieza.DAMA.toString();
+        return TipoDePieza.DAMA.toString();
     }
     
     

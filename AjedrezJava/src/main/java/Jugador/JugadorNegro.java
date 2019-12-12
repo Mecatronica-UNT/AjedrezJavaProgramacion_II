@@ -1,5 +1,3 @@
-
-//revisar línea 63 a 66 (falta arreglar algo)
 package Jugador;
  
 import Otros.Color;
@@ -13,10 +11,7 @@ import java.util.ArrayList;
 
 import java.util.Collection;
 import java.util.List;
-/**
- *
- * @author JOSE MONTALVO
- */
+
 public class JugadorNegro extends Jugador{
     public JugadorNegro(final Tablero tablero, 
                          final Collection<Movimiento> movimientosLegalesStandardBlanco, 
@@ -24,7 +19,7 @@ public class JugadorNegro extends Jugador{
         
         super(tablero, movimientosLegalesStandardNegro, movimientosLegalesStandardBlanco);
     }
-    
+
     @Override
     public Collection<Pieza> getPiezasActivas(){
         return this.tablero.getPiezasNegras();
