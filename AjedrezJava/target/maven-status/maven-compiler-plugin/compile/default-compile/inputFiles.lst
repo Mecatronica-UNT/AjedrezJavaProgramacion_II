@@ -2,7 +2,7 @@ C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Jugador\Estat
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Tablero\Tablero.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Otros\Herramientas.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Piezas\Rey.java
-C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\GUI\Ventana1.java
+C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\GUI\VentanaTablero.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Piezas\Dama.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Jugador\JugadorNegro.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Jugador\TransiciónDeMovimiento.java
@@ -11,10 +11,12 @@ C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Jugador\Jugad
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Piezas\Torre.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Tests\TestAjedrez.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Tablero\Casilla.java
+C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\GUI\VentanaPiezasTomadas.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Jugador\Jugador.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Piezas\Caballo.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Otros\Color.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Piezas\Pieza.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Piezas\Peón.java
+C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\GUI\PanelHistorialJuego.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\GUI\JAjedrez.java
 C:\Users\ASUS\Documents\NetBeansProjects\AjedrezJava\src\main\java\Tablero\Movimiento.java
